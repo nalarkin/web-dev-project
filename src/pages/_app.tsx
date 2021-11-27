@@ -1,6 +1,8 @@
 import { NextPage } from 'next';
 import { AppProps } from 'next/app';
 
+import CartUIProvider from '../components/cart/CardUIProvider';
+import CartProvider from '../components/cart/CartProvider';
 import Layout from '../layout/Main';
 import { IMetaProps } from '../layout/Meta';
 
@@ -19,9 +21,13 @@ type AppPropsWithInfo = AppProps & {
 const MyApp = ({ Component, pageProps }: AppPropsWithInfo) => {
   const pageMetaInfo = Component.info ?? defaultMeta;
   return (
-    <Layout meta={pageMetaInfo}>
-      <Component {...pageProps} />
-    </Layout>
+    <CartProvider>
+      <CartUIProvider>
+        <Layout meta={pageMetaInfo}>
+          <Component {...pageProps} />
+        </Layout>
+      </CartUIProvider>
+    </CartProvider>
   );
 };
 

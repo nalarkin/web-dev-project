@@ -11,11 +11,26 @@
 .header {
   @extend %padding;
   padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .footer {
   @extend %padding;
   padding-bottom: 20px;
+}
+.navLinks {
+  outline: 2px black solid;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.headerLink {
+  padding: 10px 20px;
+  &:hover {
+    background-color: gray;
+  }
 }
 
 .main {
