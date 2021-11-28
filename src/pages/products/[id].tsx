@@ -6,7 +6,13 @@ import Product from '../../models/product';
 
 // import { connectToDatabase } from "../utils/mongodb";
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+  // console.log('response is ', JSON.stringify(res, null, 2));
+  // if (res.status === 404) throw new Error('Page does not exist');
+
+  return res.json();
+};
 
 export default function Top() {
   const router = useRouter();

@@ -13,12 +13,11 @@ type CartContextType = {
   toggleCart: () => void;
 };
 
-const f = () => null;
 const initialContext = {
   isCartOpen: false,
-  openCart: f,
-  closeCart: f,
-  toggleCart: f,
+  openCart: () => null,
+  closeCart: () => null,
+  toggleCart: () => null,
 };
 
 export const CartContext = createContext<CartContextType>(initialContext);
