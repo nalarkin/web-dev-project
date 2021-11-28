@@ -7,7 +7,7 @@ export default function CartIconWithItems() {
 
   return (
     <>
-      <div className="relative">
+      <div className="">
         <CartIcon />
 
         <div
