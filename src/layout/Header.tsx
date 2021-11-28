@@ -40,7 +40,7 @@ const Header = ({ storeName }: { storeName: string }) => {
             <HeaderLink href="/checklist" text="Checklist" />
           </div> */}
           <div>
-            <Link href="cart">
+            <Link href="/cart">
               <a>
                 <CartIconWithItems />
               </a>

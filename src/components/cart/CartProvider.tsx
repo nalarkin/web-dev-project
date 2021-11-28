@@ -33,7 +33,7 @@ export default function CartProvider({ children }: CartProviderProps) {
     (updatedItems: Item[]) => {
       setItems(updatedItems);
     },
-    [items, setItems]
+    [setItems]
   );
   const addItemToCart = React.useCallback(
     (item: Item) => {

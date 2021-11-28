@@ -14,15 +14,13 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
   const { db } = await connectToDatabase();
   try {
     // @ts-ignore
-    const products = await db.findOne({ _id: ObjectId(id) });
-    res.json(products);
+    const product = await db.findOne({ _id: ObjectId(id) });
+    if (product === null || !('_id' in product)) {
+      res.status(404).send('This product does not exist');
+    } else {
+      res.json(product);
+    }
   } catch (error) {
     res.status(500).send(error);
   }
 };
-
-// POST
-
-// PUT
-
-// DELETE

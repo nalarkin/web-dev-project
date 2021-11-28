@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
+import ProductDetails from '../../components/products/ProductDetails';
+import Product from '../../models/product';
+
 // import { connectToDatabase } from "../utils/mongodb";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -8,15 +11,15 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function Top() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error } = useSWR(id ? `/api/products/${id}` : null, fetcher);
+  const { data, error } = useSWR<Product>(
+    id ? `/api/products/${id}` : null,
+    fetcher
+  );
   if (error) return 'An error has occurred.';
   if (!data) return 'Loading...';
   return (
     <div>
-      <h1>Products Selling</h1>
-      <p>
-        <small>(According to Metacritic)</small>
-      </p>
+      <ProductDetails product={data} />
       <p>{`${JSON.stringify(data, null, 2)}`}</p>
     </div>
   );
