@@ -35,7 +35,11 @@ const Main = ({ meta, children }: MainProps) => {
             <HeaderLink href="/checklist" text="Checklist" />
           </nav>
           <div>
-            <CartIconWithItems />
+            <Link href="cart">
+              <a>
+                <CartIconWithItems />
+              </a>
+            </Link>
           </div>
         </header>
         <main className={style.main}>{children}</main>
