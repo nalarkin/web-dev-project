@@ -26,7 +26,8 @@
         "prettier/prettier": [
           "error",
           {
-            "singleQuote": true
+            "singleQuote": true,
+            "endOfLine": "auto"
           }
         ],
         "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
@@ -60,7 +61,8 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }
-        ]
+        ],
+        "no-underscore-dangle": ["error", { "allow": ["_id"] }]
       }
     }
   ]
