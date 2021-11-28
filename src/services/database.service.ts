@@ -4,10 +4,14 @@ import * as mongoDB from 'mongodb';
 // Global Variables
 export const collections: {
   products?: mongoDB.Collection;
+  client?: mongoDB.MongoClient;
 } = {};
 
 // Initialize Connection
 export async function connectToDatabase() {
+  if (collections.products !== undefined && collections.client !== undefined) {
+    return { db: collections.products, client: collections.client };
+  }
   dotenv.config();
 
   const client: mongoDB.MongoClient = new mongoDB.MongoClient(
@@ -28,4 +32,5 @@ export async function connectToDatabase() {
   console.log(
     `Successfully connected to database: ${db.databaseName} and collection: ${productsCollection.collectionName}`
   );
+  return { db: collections.products, client };
 }

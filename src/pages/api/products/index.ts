@@ -5,18 +5,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Product from '../../../models/product';
-import {
-  collections,
-  connectToDatabase,
-} from '../../../services/database.service';
+import { connectToDatabase } from '../../../services/database.service';
 // Global Config
 
 // GET
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
-  await connectToDatabase();
+  const { db } = await connectToDatabase();
   try {
     // @ts-ignore
-    const products = (await collections.products
+    const products = (await db
       .find({})
       .limit(20)
       .toArray()) as unknown as Product[];

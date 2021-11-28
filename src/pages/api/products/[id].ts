@@ -5,19 +5,16 @@
 import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import {
-  collections,
-  connectToDatabase,
-} from '../../../services/database.service';
+import { connectToDatabase } from '../../../services/database.service';
 // Global Config
 
 // GET
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   const { id } = _req.query;
-  await connectToDatabase();
+  const { db } = await connectToDatabase();
   try {
     // @ts-ignore
-    const products = await collections.products?.findOne({ _id: ObjectId(id) });
+    const products = await db.findOne({ _id: ObjectId(id) });
     res.json(products);
   } catch (error) {
     res.status(500).send(error);
