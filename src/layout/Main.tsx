@@ -1,6 +1,4 @@
-import Link from 'next/link';
-
-import CartIconWithItems from '../components/cart/CartIconWithItems';
+import Header from './Header';
 import style from './Main.module.scss';
 import { IMetaProps, Meta } from './Meta';
 
@@ -10,43 +8,17 @@ type MainProps = {
   children: React.ReactNode;
 };
 
-type HeaderLinkProps = {
-  href: string;
-  text: string;
-};
-
-const HeaderLink = ({ href, text }: HeaderLinkProps) => {
-  return (
-    <Link href={href}>
-      <a className={style.headerLink}> {text} </a>
-    </Link>
-  );
-};
-
-const Main = ({ meta, hero, children }: MainProps) => {
+const Main = ({ meta, children }: MainProps) => {
   return (
     <>
       <Meta {...meta} />
       <div className={style.app}>
-        <header className={style.header}>
-          <nav className={style.navLinks}>
-            <HeaderLink href="/" text="Nate's Notebook" />
-            {/* <HeaderLink href="/shop" text="Shop" /> */}
-            <HeaderLink href="/products" text="All Products" />
-            <HeaderLink href="/about" text="About" />
-            <HeaderLink href="/checklist" text="Checklist" />
-          </nav>
-          <div>
-            <Link href="cart">
-              <a>
-                <CartIconWithItems />
-              </a>
-            </Link>
+        <Header storeName="Nate's Notebook" />
+        <main className="relative bg-gray-50 gradient">
+          {/* {hero} */}
+          <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8">
+            {children}
           </div>
-        </header>
-        <main className={style.main}>
-          {hero}
-          {children}
         </main>
         <footer className={style.footer}>Footer here</footer>
       </div>
