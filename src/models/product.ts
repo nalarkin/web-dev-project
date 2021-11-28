@@ -8,6 +8,11 @@ export default class Product {
     public price: number,
     public quantity: number,
     public image_url: string,
-    public id?: ObjectId
+    public _id?: ObjectId
   ) {}
 }
+
+export const convertToObjectId = (id: string) => {
+  // console.log(`converting id: ${id} to ObjectId`);
+  return new ObjectId(id);
+};

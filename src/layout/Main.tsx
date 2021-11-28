@@ -6,6 +6,7 @@ import { IMetaProps, Meta } from './Meta';
 
 type MainProps = {
   meta: IMetaProps;
+  hero: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -22,7 +23,7 @@ const HeaderLink = ({ href, text }: HeaderLinkProps) => {
   );
 };
 
-const Main = ({ meta, children }: MainProps) => {
+const Main = ({ meta, hero, children }: MainProps) => {
   return (
     <>
       <Meta {...meta} />
@@ -31,6 +32,7 @@ const Main = ({ meta, children }: MainProps) => {
           <nav className={style.navLinks}>
             <HeaderLink href="/" text="Nate's Notebook" />
             {/* <HeaderLink href="/shop" text="Shop" /> */}
+            <HeaderLink href="/products" text="All Products" />
             <HeaderLink href="/about" text="About" />
             <HeaderLink href="/checklist" text="Checklist" />
           </nav>
@@ -42,7 +44,10 @@ const Main = ({ meta, children }: MainProps) => {
             </Link>
           </div>
         </header>
-        <main className={style.main}>{children}</main>
+        <main className={style.main}>
+          {hero}
+          {children}
+        </main>
         <footer className={style.footer}>Footer here</footer>
       </div>
     </>

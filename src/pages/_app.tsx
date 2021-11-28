@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 
 import CartUIProvider from '../components/cart/CardUIProvider';
 import CartProvider from '../components/cart/CartProvider';
+// eslint-disable-next-line import/no-named-as-default
 import Layout from '../layout/Main';
 import { IMetaProps } from '../layout/Meta';
 
@@ -11,7 +12,8 @@ import '../styles/main.css';
 const defaultMeta = { title: 'Nates Site', description: 'Web Dev Project' };
 
 type NextPageWithLayout = NextPage & {
-  info?: IMetaProps;
+  meta?: IMetaProps;
+  hero?: React.ReactNode;
 };
 
 type AppPropsWithInfo = AppProps & {
@@ -19,11 +21,12 @@ type AppPropsWithInfo = AppProps & {
 };
 
 const MyApp = ({ Component, pageProps }: AppPropsWithInfo) => {
-  const pageMetaInfo = Component.info ?? defaultMeta;
+  const pageMetaInfo = Component.meta ?? defaultMeta;
+  const pageHero = Component.hero ?? null;
   return (
     <CartProvider>
       <CartUIProvider>
-        <Layout meta={pageMetaInfo}>
+        <Layout meta={pageMetaInfo} hero={pageHero}>
           <Component {...pageProps} />
         </Layout>
       </CartUIProvider>
