@@ -10,6 +10,7 @@ import { LoginSchema, submitButtonIsDisabled } from './validation';
 
 import { mutate } from 'swr';
 import { useAuth } from './AuthProvider';
+import { useToast } from '../Toast';
 
 interface FormValues {
   username: string;
@@ -18,6 +19,7 @@ interface FormValues {
 
 const LoginForm = () => {
   const { logIn, logOut } = useAuth();
+  const { notifySuccess, notifyError } = useToast();
   const submitForm = ({ username, password }: FormValues) => {
     mutate('/api/auth', async () => {
       // let's update the todo with ID `1` to be completed,
@@ -29,8 +31,10 @@ const LoginForm = () => {
 
       if (res.ok) {
         logIn();
+        notifySuccess('Signed In!');
       } else {
         logOut();
+        notifyError('Invalid Credentials');
       }
     });
     // alert(JSON.stringify({ username, password }));
