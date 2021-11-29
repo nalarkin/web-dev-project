@@ -32,8 +32,8 @@ export default function HomePage() {
 }
 
 HomePage.meta = {
-  title: 'Nates dope site',
-  description: 'my fav',
+  title: "Nate's Notebook",
+  description: 'School supplies at an incredible price',
 };
 HomePage.hero = <GradientBackground />;
 // HomePage.hero = <GradientBackground />;

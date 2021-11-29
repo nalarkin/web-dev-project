@@ -33,3 +33,8 @@ export default function DetailedProductPage() {
   const { id } = router.query;
   return <DetailPage id={id} />;
 }
+
+DetailedProductPage.meta = {
+  title: "Products | Nate's Notebook",
+  description: 'School supplies at an incredible price',
+};

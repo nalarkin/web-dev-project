@@ -92,3 +92,8 @@ const ChecklistPage = () => {
 };
 
 export default ChecklistPage;
+
+ChecklistPage.meta = {
+  title: "Checklist Page | Nate's Notebook",
+  description: 'Site checklist page.',
+};

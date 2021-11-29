@@ -152,7 +152,7 @@ const CartPage = () => {
   );
 };
 
-CartPage.info = {
+CartPage.meta = {
   title: 'My Cart',
   description: 'Your Shopping Cart',
 };

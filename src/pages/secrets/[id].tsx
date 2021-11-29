@@ -48,3 +48,8 @@ export default function SecretProductPage() {
 
   return <Spinner />;
 }
+
+SecretProductPage.meta = {
+  title: "Secret Products | Nate's Notebook",
+  description: 'Top secret products for sale.',
+};

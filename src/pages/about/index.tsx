@@ -85,9 +85,9 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
-
-AboutPage.info = {
-  title: 'About Page',
+AboutPage.meta = {
+  title: "About Page | Nate's notebook",
   description: 'All About my Site',
 };
+
+export default AboutPage;

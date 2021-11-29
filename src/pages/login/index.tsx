@@ -15,3 +15,8 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+LoginPage.meta = {
+  title: "Login | Nate's Notebook",
+  description: 'Login Page',
+};

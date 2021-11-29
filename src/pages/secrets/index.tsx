@@ -39,6 +39,6 @@ export default SecretPage;
 // import { connectToDatabase } from "../utils/mongodb";
 
 SecretPage.meta = {
-  title: 'Secret Page',
-  description: '',
+  title: "Secret Products | Nate's Notebook",
+  description: 'Top secret products for sale.',
 };

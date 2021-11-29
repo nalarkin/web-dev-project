@@ -46,3 +46,8 @@ const DescriptionPage = () => {
 };
 
 export default DescriptionPage;
+
+DescriptionPage.meta = {
+  title: "Description Page | Nate's Notebook",
+  description: 'Site description page.',
+};

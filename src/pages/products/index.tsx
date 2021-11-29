@@ -17,3 +17,8 @@ export default function ProductsPage() {
     </>
   );
 }
+
+ProductsPage.meta = {
+  title: "Products | Nate's Notebook",
+  description: 'School supplies at an incredible price',
+};
