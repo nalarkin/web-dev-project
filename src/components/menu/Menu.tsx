@@ -10,6 +10,12 @@ import style from './Menu.module.scss';
 
 const Menu = () => {
   const [isActive, setMenu] = useState<boolean>(false);
+  const additionalMenuLinks = [
+    { id: '/login', text: 'Login' },
+    { id: '/cart', text: 'Cart' },
+  ];
+  const menuLinks = [...collections, ...additionalMenuLinks];
+
   const handleClick = () => {
     setMenu(!isActive);
   };
@@ -27,7 +33,7 @@ const Menu = () => {
     >
       <ul className={style.menu}>
         <List
-          items={collections}
+          items={menuLinks}
           renderItem={({ id, text }): JSX.Element => {
             return (
               <li
@@ -51,7 +57,8 @@ const Menu = () => {
   );
 
   return (
-    <div className="hidden lg:flex">
+    // <div className="hidden lg:flex">
+    <div className="absolute">
       {isActive ? content : null}
       {button}
     </div>
