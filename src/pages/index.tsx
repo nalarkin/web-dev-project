@@ -13,7 +13,7 @@ export default function HomePage() {
   const { data, error } = useSWR<Product[]>('/api/products', fetcher);
   if (error) return <Spinner />;
   if (!data) return <Spinner />;
-  const products = data.slice(0, 3);
+  const products = data.filter((val) => val.name !== 'Premium Notebook');
   return (
     <div className="relative mb-12">
       <Welcome />

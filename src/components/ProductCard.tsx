@@ -20,12 +20,16 @@ const ProductCard = ({ product, isSecret = false }: ProductCardProps) => {
       <Link href={href}>
         <a className="rounded-lg border-2 border-gray-200 mb-2 relative flex items-center justify-center overflow-hidden object-cover h-96">
           {product.image_url ? (
-            <Image
-              className="bg-white absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain hover:scale-110"
-              src={product.image_url}
-              layout="fill"
-              alt={product.name}
-            />
+            <div className="bg-white absolute w-full h-full flex items-center justify-center">
+              <Image
+                className="transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain hover:scale-110"
+                src={product.image_url}
+                // layout="fill"
+                width="300"
+                height="400"
+                alt={product.name}
+              />
+            </div>
           ) : null}
           {product.quantity <= 0 && (
             <div className="absolute top-3 left-3 rounded-3xl text-xs bg-black text-white py-3 px-4">
