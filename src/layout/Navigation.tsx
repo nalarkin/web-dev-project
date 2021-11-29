@@ -9,7 +9,7 @@ const collections: Collection[] = [
   { id: '/products', text: 'All Products' },
   { id: '/about', text: 'About' },
   { id: '/checklist', text: 'Checklist' },
-  { id: '/secret', text: 'Secret' },
+  { id: '/secrets', text: 'Secret' },
 ];
 
 export default function Navigation() {

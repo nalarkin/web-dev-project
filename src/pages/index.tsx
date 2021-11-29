@@ -10,7 +10,7 @@ import Product from '../models/product';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function HomePage() {
-  const { data, error } = useSWR('/api/products', fetcher);
+  const { data, error } = useSWR<Product[]>('/api/products', fetcher);
   if (error) return 'An error has occurred.';
   if (!data) return <Spinner />;
   return (
@@ -22,14 +22,6 @@ export default function HomePage() {
             // eslint-disable-next-line no-underscore-dangle
             <li key={`${product._id ?? idx}`}>
               <ProductCard product={product} />
-              {/* <h2>{product.name}</h2>
-            <p>{product.quantity}</p>
-            <p>{`PRICE: ${JSON.stringify(product.price, null, 2)}`}</p>
-            <p>{product._id}</p>
-            <p>{`${JSON.stringify(product, null, 2)}`}</p>
-            <div className="w-full">
-              <img src={product.image_url} className={style.image} />
-            </div> */}
             </li>
           ))}
         </ul>

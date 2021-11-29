@@ -40,7 +40,7 @@ const checklistItems = [
       'Membership Area – Have part of your site that only a user that is logged in can use that portion of your site',
     description:
       'The secret area which has content  only visible if you are logged in.',
-    href: '/secret',
+    href: '/secrets',
   },
   {
     requirement:

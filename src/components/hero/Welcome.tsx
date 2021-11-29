@@ -3,7 +3,7 @@ export default function Welcome() {
     <div className="text-gray-900 pt-16 rounded-[40px] my-16 px-4 xl:px-12 bg-gradient-to-b from-white -mx-4 xl:-mx-12">
       <div className="text-center mb-16">
         <h1 className="font-extrabold mb-4 text-5xl md:text-7xl">
-          Great products at even greater prices
+          School Supplies at Prices You&apos;ll love
         </h1>
         <p className="text-lg mb-8">Great products at even greater prices</p>
         <div className="flex flex-col lg:flex-row justify-center items-center gap-8 text-gray-700">
