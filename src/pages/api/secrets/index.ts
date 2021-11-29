@@ -6,7 +6,7 @@ import { ObjectId } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import Product from '../../../models/product';
-import { connectToDatabase } from '../../../services/database.service';
+import { client } from '../../../services/database.service';
 // Global Config
 
 // GET
@@ -35,16 +35,19 @@ const updateDocument = (change: number) => {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { secrets } = await connectToDatabase();
+  // const { secrets } = await connectToDatabase();
   try {
+    await client.connect();
     switch (req.method) {
       case 'GET': {
         // @ts-ignore
-        const products = (await secrets
+        const secrets = (await client
+          .db(process.env.DB_NAME)
+          .collection(process.env.SECRETS_COLLECTION_NAME ?? '')
           .find({})
           .limit(20)
           .toArray()) as unknown as Product[];
-        res.json(products);
+        res.json(secrets);
         break;
       }
       case 'PATCH': {
@@ -52,10 +55,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // console.log(`PATCH METHOD ${JSON.stringify(parsed)}`);
         await Promise.all(
           parsed.map(async (product: Product) => {
-            const result = await secrets.updateOne(
-              { _id: new ObjectId(product._id) },
-              updateDocument(-1 * product.quantity)
-            );
+            const result = await client
+              .db(process.env.DB_NAME)
+              .collection(process.env.SECRETS_COLLECTION_NAME ?? '')
+              .updateOne(
+                { _id: new ObjectId(product._id) },
+                updateDocument(-1 * product.quantity)
+              );
             return result;
           })
         );
@@ -75,6 +81,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } catch (error) {
     res.status(500).send(error);
+  } finally {
+    await client.close();
   }
 };
 

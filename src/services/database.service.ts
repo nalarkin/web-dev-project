@@ -1,14 +1,19 @@
 // External Dependencies
 import * as dotenv from 'dotenv';
 import * as mongoDB from 'mongodb';
+
 // Global Variables
+
+export const client: mongoDB.MongoClient = new mongoDB.MongoClient(
+  process.env.MONGODB_URI ?? ''
+);
+
 export const collections: {
   products?: mongoDB.Collection;
   users?: mongoDB.Collection;
   secret_products?: mongoDB.Collection;
   client?: mongoDB.MongoClient;
 } = {};
-
 // Initialize Connection
 export async function connectToDatabase() {
   if (
@@ -25,10 +30,6 @@ export async function connectToDatabase() {
     };
   }
   dotenv.config();
-
-  const client: mongoDB.MongoClient = new mongoDB.MongoClient(
-    process.env.MONGODB_URI ?? ''
-  );
 
   await client.connect();
 
