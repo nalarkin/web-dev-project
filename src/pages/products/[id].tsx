@@ -9,9 +9,6 @@ import Product from '../../models/product';
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
-  // console.log('response is ', JSON.stringify(res, null, 2));
-  // if (res.status === 404) throw new Error('Page does not exist');
-
   return res.json();
 };
 
