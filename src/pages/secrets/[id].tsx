@@ -19,7 +19,6 @@ const fetcher = async (url: string) => {
 const SecretProductDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log(`ID in secret details; ${id}`);
   const { data, error } = useSWR<Product>(
     id ? `/api/secrets/${id}` : null,
     fetcher
@@ -29,7 +28,6 @@ const SecretProductDetails = () => {
   return (
     <div>
       <ProductDetails product={data} />
-      <p>{`${JSON.stringify(data, null, 2)}`}</p>
     </div>
   );
 };

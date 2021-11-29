@@ -1,7 +1,9 @@
 .app {
-  min-height: 100vh;
+  min-height: 101vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  // overflow-y: scroll; // overflow-x: hidden;
+  // overflow-y: overlay;
 }
 
 %padding {
@@ -31,7 +33,4 @@
   &:hover {
     background-color: gray;
   }
-}
-
-.main {
 }

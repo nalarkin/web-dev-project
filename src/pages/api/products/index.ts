@@ -35,8 +35,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       }
       case 'PATCH': {
         const parsed = JSON.parse(req.body) as Product[];
-        console.log(`PATCH METHOD ${JSON.stringify(parsed)}`);
-        const allUpdatedResults = await Promise.all(
+        // console.log(`PATCH METHOD ${JSON.stringify(parsed)}`);
+        await Promise.all(
           parsed.map(async (product: Product) => {
             const result = await db?.updateOne(
               { _id: new ObjectId(product._id) },
@@ -45,9 +45,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             return result;
           })
         );
-        console.log(
-          `ALL RESULTS = ${JSON.stringify(allUpdatedResults, null, 2)}`
-        );
+        // console.log(
+        //   `ALL RESULTS = ${JSON.stringify(allUpdatedResults, null, 2)}`
+        // );
         res.status(200).json({});
         break;
       }

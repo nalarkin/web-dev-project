@@ -1,3 +1,4 @@
+import Footer from './Footer';
 import Header from './Header';
 import style from './Main.module.scss';
 import { IMetaProps, Meta } from './Meta';
@@ -20,7 +21,9 @@ const Main = ({ meta, hero, children }: MainProps) => {
             {children}
           </div>
         </main>
-        <footer className={style.footer}>Footer here</footer>
+        <div className={style.footer}>
+          <Footer />
+        </div>
       </div>
     </>
   );

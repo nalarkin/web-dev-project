@@ -17,7 +17,7 @@ const LoginIcon = () => {
   };
 
   return (
-    <button className="" onClick={() => handleClick(isLoggedIn)}>
+    <button className="hidden md:block" onClick={() => handleClick(isLoggedIn)}>
       <div className="flex items-center">
         <div className="mr-1">{isLoggedIn ? 'Sign Out' : 'Sign In'}</div>
         {isLoggedIn ? (

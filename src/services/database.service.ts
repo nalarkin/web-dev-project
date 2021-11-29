@@ -37,20 +37,20 @@ export async function connectToDatabase() {
   collections.products = db.collection(
     process.env.PRODUCTS_COLLECTION_NAME ?? ''
   );
-  console.log(`Connected collection: ${collections.products.collectionName}`);
+  // console.log(`Connected collection: ${collections.products.collectionName}`);
 
   // collections.products = productsCollection;
   collections.users = db.collection(process.env.USERS_COLLECTION_NAME ?? '');
-  console.log(`Connected collection: ${collections.users.collectionName}`);
+  // console.log(`Connected collection: ${collections.users.collectionName}`);
 
   // collections.users = usersCollection;
   collections.secret_products = db.collection(
     process.env.SECRETS_COLLECTION_NAME ?? ''
   );
-  console.log(
-    `Connected collection: ${collections.secret_products.collectionName}`
-  );
-  console.log('============================');
+  // console.log(
+  //   `Connected collection: ${collections.secret_products.collectionName}`
+  // );
+  // console.log('============================');
 
   // collections.secrets = secretsCollection;
 

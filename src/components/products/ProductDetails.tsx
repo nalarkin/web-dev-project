@@ -1,6 +1,5 @@
 import Product from '../../models/product';
 // import div from '../../models/product';
-import { BUTTON_SECONDARY_CLASSES } from '../Button';
 import AddToCartButton from '../cart/AddToCartButton';
 // import Gallery from './Gallery.client';
 // import ProductOptions from './ProductOptions.client';
@@ -38,11 +37,12 @@ function AddToCartMarkup({ product }: { product: Product }) {
   return (
     <div className="space-y-2 mb-8">
       <AddToCartButton product={product} />
-      {isOutOfStock ? (
-        <p className="text-black text-center">Available in 2-3 weeks</p>
-      ) : (
-        <button className={BUTTON_SECONDARY_CLASSES}>Buy it now</button>
-      )}
+      {
+        isOutOfStock ? (
+          <p className="text-black text-center">Available in 2-3 weeks</p>
+        ) : null
+        // <button className={BUTTON_SECONDARY_CLASSES}>Buy it now</button>
+      }
     </div>
   );
 }
@@ -54,32 +54,29 @@ export default function ProductDetails({ product }: { product: Product }) {
       <div className="">
         <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8 my-16">
           <div className="md:hidden mt-5 mb-8">
-            <h1 className="text-4xl font-bold text-black mb-4">
+            {/* <h1 className="text-4xl font-bold text-black mb-4">
               {product.name && (
                 <div className="text-sm font-medium mb-2 text-gray-900">
                   {product.name}
                 </div>
               )}
-            </h1>
+            </h1> */}
 
             <span />
-            <div className="flex justify-between md:block">
-              $39.30
-              {/* <ProductPriceMarkup /> */}
-            </div>
+            <img src={product.image_url} alt={product.name} />
           </div>
 
           <div>
             <div className="hidden md:block">
-              <h1 className="text-5xl font-bold text-black mb-4">
+              {/* <h1 className="text-5xl font-bold text-black mb-4">
                 {product.name && (
                   <div className="text-sm font-medium mb-2 text-gray-900">
                     {product.name}
                   </div>
                 )}
-              </h1>
+              </h1> */}
 
-              <div>$69.69</div>
+              {/* <div className="text-gray-900 text-xl">$69.69</div> */}
               <div className="w-full grid">
                 {/* <Image src={product.image_url} width={1000} /> */}
                 <img src={product.image_url} alt={product.name} />
@@ -89,10 +86,10 @@ export default function ProductDetails({ product }: { product: Product }) {
             </div>
             {/* Product Options */}
           </div>
-          <div className="mt-8">
-            <h2>{product.name}</h2>
-            <h2>{product.price}</h2>
-            <h2>{product.quantity}</h2>
+          <div className="mt-8 flex flex-col gap-5">
+            <h1 className="text-gray-900 text-2xl">{product.name}</h1>
+            <h2 className="text-gray-900 text-xl">${product.price}</h2>
+            <h2 className="text-gray-900 text-xl">Stock: {product.quantity}</h2>
 
             <AddToCartMarkup product={product} />
           </div>

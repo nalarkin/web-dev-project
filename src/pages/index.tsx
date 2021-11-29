@@ -13,12 +13,13 @@ export default function HomePage() {
   const { data, error } = useSWR<Product[]>('/api/products', fetcher);
   if (error) return 'An error has occurred.';
   if (!data) return <Spinner />;
+  const products = data.slice(0, 3);
   return (
     <div className="relative mb-12">
       <Welcome />
       <div className="bg-white p-12 shadow-xl rounded-xl mb-10">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {data.map((product: Product, idx: number) => (
+          {products.map((product: Product, idx: number) => (
             // eslint-disable-next-line no-underscore-dangle
             <li key={`${product._id ?? idx}`}>
               <ProductCard product={product} />

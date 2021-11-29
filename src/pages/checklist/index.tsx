@@ -6,13 +6,15 @@ const checklistItems = [
   {
     requirement:
       'Database Usage – At least one page that pulls information from a custom database table',
-    // description: '',
+    description:
+      'Every individual product page pulls from a database (single query), the "All Products" page pulls query for all items.  login connects with a users databas.',
     // href: '',
   },
   {
     requirement:
       'Ajax usage – At least one page that uses ajax to update the information on the page',
-    description: 'All pages that have products',
+    description:
+      'Almost every page has AJAX. All products are loaded asyncronously, after the static header/layout is loaded.',
     // href: '',
   },
   {
@@ -51,25 +53,25 @@ const checklistItems = [
   {
     requirement:
       'Checklist Page - The checklist of all the items that are part of the site and the page where they are being demonstrated',
-    description: '',
-    href: '/login',
+    description: 'See the Checklist Page',
+    href: '/checklist',
   },
   {
     requirement:
       'Site Description Page - describe who are the users of your site what is it that you want your users to get out of using the site,  What problem are you trying to solve for the users of the site, What are the actions that you want the users to take once they have used your site',
-    description: '',
-    href: '/',
+    description: 'See the Desciption Page',
+    href: '/description',
   },
   {
     requirement:
       'About Us Page - Section 1 – About who you are. Section 2 – Project Description and why you choose this project. Section 3 – Description of technology used for your site. Section 4 – What have you learned in this class',
-    description: '',
-    href: '/',
+    description: 'See the About Page',
+    href: '/about',
   },
   {
     requirement:
-      'Homepage - itial Page needs to set up what the site is about and speak to the users of the site',
-    description: '',
+      'Homepage - initial Page needs to set up what the site is about and speak to the users of the site',
+    description: 'See the home page',
     href: '/',
   },
 ];
@@ -77,8 +79,9 @@ const checklistItems = [
 const ChecklistPage = () => {
   return (
     <div>
-      The checklist of all the items that are part of the site and the page
-      where they are being demonstrated
+      <h1 className="font-bold text-4xl md:text-5xl text-blue-700 mb-6 text-center">
+        Checklist
+      </h1>
       <ul>
         {checklistItems.map((item, idx) => (
           <CheckListItem {...item} key={idx} />

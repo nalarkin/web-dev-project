@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { mutate } from 'swr';
 
+import { BUTTON_PRIMARY_CLASSES } from '../../components/Button';
 import { useCart } from '../../components/cart/CartProvider';
 import { useToast } from '../../components/Toast';
 import Product from '../../models/product';
@@ -97,10 +98,10 @@ const CheckoutButton = () => {
   async function purchaseSecretProducts() {
     const secretProducts = products.filter((item) => item.status === 'secret');
     if (secretProducts.length <= 0) return;
-    await mutate('/api/secrets', async () => {
+    await mutate('/api/secrets/', async () => {
       // let's update the todo with ID `1` to be completed,
       // this API returns the updated data
-      await fetch('/api/secrets', {
+      await fetch('/api/secrets/', {
         method: 'PATCH',
         body: JSON.stringify(secretProducts),
       });
@@ -116,10 +117,16 @@ const CheckoutButton = () => {
       notifyError();
     }
   };
-  return <button onClick={handleClick}>Complete Purchase</button>;
+  return (
+    <div className="w-max mx-auto mt-10">
+      <button onClick={handleClick} className={BUTTON_PRIMARY_CLASSES}>
+        Complete Purchase
+      </button>
+    </div>
+  );
 };
 
-const CartPage = () => {
+const CartWithItems = () => {
   const { items } = useCart();
   // const testProducts = [testProduct, testProduct, testProduct, testProduct];
   return (
@@ -129,20 +136,20 @@ const CartPage = () => {
         <CartItem product={item} key={idx} />
       ))}
       <TotalPrice />
-      {JSON.stringify(items, null, 2)}
       <CheckoutButton />
     </div>
   );
-  /**
-   * <CartRow
-   *    Price
-   *    quantity
-   *    image
-   * />
-   * total Price
-   *
-   * checkout button
-   */
+};
+
+const CartPage = () => {
+  const { items } = useCart();
+  // const testProducts = [testProduct, testProduct, testProduct, testProduct];
+  if (items.length > 0) {
+    return <CartWithItems />;
+  }
+  return (
+    <div className="mx-auto text-xl text-center mt-5">No Items In Cart</div>
+  );
 };
 
 CartPage.info = {

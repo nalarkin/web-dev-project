@@ -27,7 +27,7 @@ export default function Top() {
   return (
     <div>
       <ProductDetails product={data} />
-      <p>{`${JSON.stringify(data, null, 2)}`}</p>
+      {/* <p>{`${JSON.stringify(data, null, 2)}`}</p> */}
     </div>
   );
 }

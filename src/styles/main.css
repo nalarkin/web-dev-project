@@ -55,6 +55,8 @@ html {
   }
 }
 
+/* body {      overflow-y: overlay;} */
+
 .loader,
 .loader:after {
   border-radius: 50%;
