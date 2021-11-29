@@ -11,7 +11,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function HomePage() {
   const { data, error } = useSWR<Product[]>('/api/products', fetcher);
-  if (error) return 'An error has occurred.';
+  if (error) return <Spinner />;
   if (!data) return <Spinner />;
   const products = data.slice(0, 3);
   return (

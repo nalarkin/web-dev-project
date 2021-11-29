@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Image from 'next/image';
-
 const DescriptionPage = () => {
   return (
     <div>
@@ -43,7 +41,6 @@ const DescriptionPage = () => {
           experience so much.
         </p>
       </section>
-      <Image src="/notebook.png" width="300" height="200" />
     </div>
   );
 };

@@ -11,7 +11,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ProtectedContent = () => {
   const { data, error } = useSWR('/api/secrets', fetcher);
-  if (error) return <div>An error has occurred</div>;
+  if (error) return <Spinner />;
   if (!data) return <Spinner />;
   return (
     <ProductGallary title="Secret Sales" products={data} isSecret={true} />

@@ -8,7 +8,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function ProductsPage() {
   const { data, error } = useSWR('/api/products', fetcher);
-  if (error) return 'An error has occurred.';
+  if (error) return <Spinner />;
   if (!data) return <Spinner />;
 
   return (

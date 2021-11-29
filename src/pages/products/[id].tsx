@@ -17,7 +17,7 @@ const DetailPage = ({ id }: { id: string | string[] | undefined }) => {
     id ? `/api/products/${id}` : null,
     fetcher
   );
-  if (error) return <div>An error has occurred.</div>;
+  if (error) return <Spinner />;
   if (!data) return <Spinner />;
   return (
     <div>

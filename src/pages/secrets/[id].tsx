@@ -25,7 +25,7 @@ const SecretProductDetails = ({
     id ? `/api/secrets/${id}` : null,
     fetcher
   );
-  if (error) return <div>{error.message}</div>;
+  if (error) return <Spinner />;
   if (!data) return <Spinner />;
   return (
     <div>
@@ -46,5 +46,5 @@ export default function SecretProductPage() {
     }
   }
 
-  return <div></div>;
+  return <Spinner />;
 }
