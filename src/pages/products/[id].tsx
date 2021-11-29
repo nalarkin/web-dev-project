@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import ProductDetails from '../../components/products/ProductDetails';
@@ -15,13 +15,12 @@ const fetcher = async (url: string) => {
   return res.json();
 };
 
-export default function Top() {
-  const { id } = Router.query;
+const DetailPage = ({ id }: { id: string | string[] | undefined }) => {
   const { data, error } = useSWR<Product>(
     id ? `/api/products/${id}` : null,
     fetcher
   );
-  if (error) return 'An error has occurred.';
+  if (error) return <div>An error has occurred.</div>;
   if (!data) return <Spinner />;
   return (
     <div>
@@ -29,4 +28,11 @@ export default function Top() {
       {/* <p>{`${JSON.stringify(data, null, 2)}`}</p> */}
     </div>
   );
+};
+
+export default function DetailedProductPage() {
+  const router = useRouter();
+  if (!router.isReady) return <Spinner />;
+  const { id } = router.query;
+  return <DetailPage id={id} />;
 }
