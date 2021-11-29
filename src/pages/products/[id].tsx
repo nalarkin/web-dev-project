@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import useSWR from 'swr';
 
 import ProductDetails from '../../components/products/ProductDetails';
@@ -16,8 +16,7 @@ const fetcher = async (url: string) => {
 };
 
 export default function Top() {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = Router.query;
   const { data, error } = useSWR<Product>(
     id ? `/api/products/${id}` : null,
     fetcher

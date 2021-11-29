@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 
 import { useAuth } from '../../components/auth/AuthProvider';
 import LoginForm from '../../components/auth/LoginForm';
 
 const LoginPage = () => {
   const { isLoggedIn } = useAuth();
-  const router = useRouter();
+  // const router = Router
   if (isLoggedIn) {
-    router.push('/');
+    Router.push('/');
   }
   return <LoginForm />;
 };

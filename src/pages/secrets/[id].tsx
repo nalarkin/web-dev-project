@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import useSWR from 'swr';
 
 import { useAuth } from '../../components/auth/AuthProvider';
@@ -17,8 +17,8 @@ const fetcher = async (url: string) => {
 };
 
 const SecretProductDetails = () => {
-  const router = useRouter();
-  const { id } = router.query;
+  // const router = Router.useRouter();
+  const { id } = Router.query;
   const { data, error } = useSWR<Product>(
     id ? `/api/secrets/${id}` : null,
     fetcher
@@ -33,10 +33,10 @@ const SecretProductDetails = () => {
 };
 
 export default function SecretProductPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const { isLoggedIn } = useAuth();
   if (!isLoggedIn) {
-    router.replace('/');
+    Router.replace('/');
   } else {
     return <SecretProductDetails />;
   }

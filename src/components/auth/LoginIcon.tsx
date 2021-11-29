@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 
 import { useAuth } from './AuthProvider';
 
 const LoginIcon = () => {
   const { isLoggedIn, logOut } = useAuth();
-  const router = useRouter();
+  // const router = useRouter();
   const handleClick = (loggedIn: boolean) => {
     if (!loggedIn) {
-      router.push('/login');
+      Router.push('/login');
     } else {
       logOut();
     }
