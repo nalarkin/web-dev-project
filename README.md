@@ -5,9 +5,7 @@
 ## Todo:
 
 1. Auth
-   1. create separate collection
    2. allow users to signup
-   3. singing in just reads the users for that matches { username, password}, if length > 0, then there is match, and set user authenticated in the provider
 2. Products Page Layout
    1. use similar layout to the one on home page
 3. Add left side menu icon

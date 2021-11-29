@@ -3,6 +3,7 @@ import useSWR from 'swr';
 import GradientBackground from '../components/hero/GradientBackground';
 import Welcome from '../components/hero/Welcome';
 import ProductCard from '../components/ProductCard';
+import Spinner from '../components/Spinner';
 import Product from '../models/product';
 // import { connectToDatabase } from "../utils/mongodb";
 
@@ -11,7 +12,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 export default function HomePage() {
   const { data, error } = useSWR('/api/products', fetcher);
   if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
+  if (!data) return <Spinner />;
   return (
     <div className="relative mb-12">
       <Welcome />

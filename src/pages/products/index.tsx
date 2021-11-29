@@ -1,35 +1,33 @@
 import useSWR from 'swr';
 
+import ProductCard from '../../components/ProductCard';
+import Spinner from '../../components/Spinner';
 import Product from '../../models/product';
 // import { connectToDatabase } from "../utils/mongodb";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Top() {
+export default function ProductsPage() {
   const { data, error } = useSWR('/api/products', fetcher);
   if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
+  if (!data) return <Spinner />;
   return (
-    <div>
-      <h1>Products Selling</h1>
-      <p>
-        <small>(According to Metacritic)</small>
+    <>
+      <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
+        All Products
+      </h1>
+      {/* <RawHtml string={collection.descriptionHtml} className="text-lg" /> */}
+      <p className="text-sm text-gray-500 mt-5 mb-5">
+        {data.length} {data.length > 1 ? 'products' : 'product'}
       </p>
-      <ul>
-        {data.map((product: Product, idx: number) => (
-          // eslint-disable-next-line no-underscore-dangle
-          <li key={`${product._id ?? idx}`}>
-            <h2>{product.name}</h2>
-            {/* <h3>{movie.metacritic}</h3> */}
-            <p>{product.quantity}</p>
-            <p>{`PRICE: ${JSON.stringify(product.price, null, 2)}`}</p>
-            <p>{product._id}</p>
-            <p>{`${JSON.stringify(product, null, 2)}`}</p>
-            {/* eslint-disable-next-line jsx-a11y/alt-text */}
-            <img src={product.image_url} />
+
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {data.map((product: Product) => (
+          <li key={product._id?.toString()}>
+            <ProductCard product={product} />
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }

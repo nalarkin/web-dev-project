@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import ProductDetails from '../../components/products/ProductDetails';
+import Spinner from '../../components/Spinner';
 import Product from '../../models/product';
 
 // import { connectToDatabase } from "../utils/mongodb";
@@ -22,7 +23,7 @@ export default function Top() {
     fetcher
   );
   if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
+  if (!data) return <Spinner />;
   return (
     <div>
       <ProductDetails product={data} />

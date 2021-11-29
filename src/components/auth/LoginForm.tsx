@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable import/order */
 /* eslint-disable unused-imports/no-unused-imports */
 import React from 'react';
@@ -20,8 +21,9 @@ interface FormValues {
 const LoginForm = () => {
   const { logIn, logOut } = useAuth();
   const { notifySuccess, notifyError } = useToast();
-  const submitForm = ({ username, password }: FormValues) => {
-    mutate('/api/auth', async () => {
+  // const [submitting, setSubmitting] = useState(false);
+  const submitForm = async ({ username, password }: FormValues) => {
+    await mutate('/api/auth', async () => {
       // let's update the todo with ID `1` to be completed,
       // this API returns the updated data
       const res = await fetch('/api/auth', {
@@ -37,6 +39,7 @@ const LoginForm = () => {
         notifyError('Invalid Credentials');
       }
     });
+    return null;
     // alert(JSON.stringify({ username, password }));
   };
 
@@ -47,10 +50,12 @@ const LoginForm = () => {
         password: '',
       }}
       validationSchema={LoginSchema}
-      onSubmit={submitForm}
+      onSubmit={async (values) => {
+        // await sleep(2000);
+        await submitForm(values);
+      }}
     >
-      {({ isValid, dirty }) => (
-        // {({ errors, touched }) => (
+      {({ isValid, dirty, isSubmitting }) => (
         <Form className="flex flex-col mt-5">
           <MyTextField
             formName="username"
@@ -64,15 +69,21 @@ const LoginForm = () => {
             formPlaceholder="Password"
             formLabel="Password"
           />
-          <div className="mx-auto mt-10">
-            <button
-              disabled={submitButtonIsDisabled(dirty, isValid)}
-              onClick={() => null}
-              type="submit"
-              className={BUTTON_PRIMARY_CLASSES}
-            >
-              Log In
-            </button>
+          <div className="mx-auto mt-10 h-3">
+            {/* <Spinner /> */}
+            {/* <Spinner loading={submitting} /> */}
+            {isSubmitting ? (
+              <div className="loader pb-5" />
+            ) : (
+              <button
+                disabled={submitButtonIsDisabled(dirty, isValid)}
+                onClick={() => null}
+                type="submit"
+                className={`${BUTTON_PRIMARY_CLASSES} `}
+              >
+                Log In
+              </button>
+            )}
           </div>
         </Form>
       )}
