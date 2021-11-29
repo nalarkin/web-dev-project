@@ -1,17 +1,19 @@
 import * as React from 'react';
 
-interface Item {
-  name: string;
-  quantity: number;
-  price: number;
-}
+import Product from '../../models/product';
+
+// interface Item {
+//   name: string;
+//   quantity: number;
+//   price: number;
+// }
 
 // const initialFunction = (_: Item[]) => null;
 
 const initialState = {
   items: [],
-  updateItems: (_: Item[]) => null,
-  addItemToCart: (_: Item) => null,
+  updateItems: (_: Product[]) => null,
+  addItemToCart: (_: Product) => null,
 };
 
 export const CartContext =
@@ -22,22 +24,33 @@ interface CartProviderProps {
 }
 
 interface SessionContextInterface {
-  items: Item[];
-  updateItems: (updatedItems: Item[]) => void;
-  addItemToCart: (item: Item) => void;
+  items: Product[];
+  updateItems: (updatedItems: Product[]) => void;
+  addItemToCart: (item: Product) => void;
 }
 
 export default function CartProvider({ children }: CartProviderProps) {
-  const [items, setItems] = React.useState<Item[]>([]);
+  const [items, setItems] = React.useState<Product[]>([]);
   const updateItems = React.useCallback(
-    (updatedItems: Item[]) => {
+    (updatedItems: Product[]) => {
       setItems(updatedItems);
     },
     [setItems]
   );
   const addItemToCart = React.useCallback(
-    (item: Item) => {
-      updateItems([...items, item]);
+    (item: Product) => {
+      if (item.quantity <= 0) return;
+      const sameItemsInCart = items.findIndex((val) => val.name === item.name);
+      if (sameItemsInCart >= 0) {
+        const matching = items[sameItemsInCart];
+        if (matching === undefined) return;
+        // const updated = { ...matching, quantity: matching.quantity + 1 };
+        matching.quantity = Math.min(matching.quantity + 1, item.quantity);
+        if (matching.quantity) setItems(items);
+        return;
+      }
+      const singleItem = { ...item, quantity: 1 };
+      updateItems([...items, singleItem]);
     },
     [items, updateItems]
   );

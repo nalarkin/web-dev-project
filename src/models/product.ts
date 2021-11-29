@@ -8,6 +8,7 @@ export default class Product {
     public price: number,
     public quantity: number,
     public image_url: string,
+    public status: 'normal' | 'secret',
     public _id?: ObjectId
   ) {}
 }

@@ -1,0 +1,15 @@
+.itemGrid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 4fr 1fr 2fr 3fr;
+  grid-template-rows: 100px;
+  gap: 20px;
+  padding: 20px 0px;
+  // height: 100px;
+}
+
+.columnHeaders {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 4fr 1fr 2fr 3fr;
+}
