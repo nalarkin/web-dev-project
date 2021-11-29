@@ -5,6 +5,7 @@ import Link from 'next/link';
 import LoginIcon from '../components/auth/LoginIcon';
 import CartIconWithItems from '../components/cart/CartIconWithItems';
 // import style from './Main.module.scss';
+import Menu from '../components/menu/Menu';
 import Navigation from './Navigation';
 
 // type HeaderLinkProps = {
@@ -30,6 +31,7 @@ const Header = ({ storeName }: { storeName: string }) => {
         <div className="text-center w-full h-full flex-col justify-between items-center">
           {/* <div className="absolute">Menu </div> */}
           <div className="flex flex-row">
+            <Menu />
             <Link href="/">
               <a className="font-black uppercase text-2xl md:text-3xl tracking-widest mx-auto">
                 {storeName}

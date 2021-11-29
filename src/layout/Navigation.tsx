@@ -5,7 +5,7 @@ type Collection = {
   text: string;
 };
 
-const collections: Collection[] = [
+export const collections: Collection[] = [
   { id: '/products', text: 'All Products' },
   { id: '/about', text: 'About' },
   { id: '/checklist', text: 'Checklist' },
