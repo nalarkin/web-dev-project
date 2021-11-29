@@ -20,7 +20,8 @@ const checklistItems = [
   {
     requirement:
       'Theme – All pages on the website have to have an overall theme (similar look and feel) that make the site consistent.',
-    description: 'Everywhere',
+    description:
+      'Everywhere. I was inspired by the recent JS framework released by shopify called Hydrogen. I copied some of the themes and added my own additions to customize it for my site.',
     href: '',
   },
   {
@@ -41,7 +42,7 @@ const checklistItems = [
     requirement:
       'Membership Area – Have part of your site that only a user that is logged in can use that portion of your site',
     description:
-      'The secret area which has content  only visible if you are logged in.',
+      'The secret area which has content  only visible if you are logged in. Login: `root` Password: `root`. Or login: `demouser`, password: `ThisIsForWPClass`',
     href: '/secrets',
   },
   {
