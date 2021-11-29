@@ -16,9 +16,11 @@ const fetcher = async (url: string) => {
   return res.json();
 };
 
-const SecretProductDetails = () => {
-  const router = useRouter();
-  const { id } = router.query;
+const SecretProductDetails = ({
+  id,
+}: {
+  id: string | string[] | undefined;
+}) => {
   const { data, error } = useSWR<Product>(
     id ? `/api/secrets/${id}` : null,
     fetcher
@@ -35,10 +37,14 @@ const SecretProductDetails = () => {
 export default function SecretProductPage() {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
-  if (!isLoggedIn) {
-    router.replace('/');
-  } else {
-    return <SecretProductDetails />;
+  if (router.isReady) {
+    const { id } = router.query;
+    if (!isLoggedIn) {
+      router.replace('/');
+    } else {
+      return <SecretProductDetails id={id} />;
+    }
   }
+
   return <div></div>;
 }
