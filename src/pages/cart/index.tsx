@@ -12,40 +12,39 @@ import { BUTTON_PRIMARY_CLASSES } from '../../components/Button';
 import { useCart } from '../../components/cart/CartProvider';
 import { useToast } from '../../components/Toast';
 import Product from '../../models/product';
-import style from './index.module.scss';
 
 const totalPrice = (quantity: number, price: number) => {
   const total = quantity * price;
   return total.toFixed(2);
 };
 
-const CartItem = ({ product }: { product: Product }) => {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { name, quantity, price, image_url, _id, status } = product;
-  const href = status === 'secret' ? `/secrets/${_id}` : `/products/${_id}`;
+// const CartItem = ({ product }: { product: Product }) => {
+//   // eslint-disable-next-line @typescript-eslint/naming-convention
+//   const { name, quantity, price, image_url, _id, status } = product;
+//   const href = status === 'secret' ? `/secrets/${_id}` : `/products/${_id}`;
 
-  return (
-    <div className={style.itemGrid}>
-      {/* <div className="block"> */}
-      <div className="p-2">
-        <Link href={href}>
-          <a>
-            <Image src={image_url} width={200} height={300} />
-          </a>
-        </Link>
-      </div>
-      {/* </div> */}
-      <Link href={href}>
-        <a>
-          <div>{name}</div>
-        </a>
-      </Link>
-      <div>{`${quantity}`}</div>
-      <div>{`$${price}`}</div>
-      <div>{`$${totalPrice(quantity, price)}`}</div>
-    </div>
-  );
-};
+//   return (
+//     <div className={style.itemGrid}>
+//       {/* <div className="block"> */}
+//       <div className="">
+//         <Link href={href}>
+//           <a>
+//             <Image src={image_url} width={200} height={300} />
+//           </a>
+//         </Link>
+//       </div>
+//       {/* </div> */}
+//       <Link href={href}>
+//         <a>
+//           <div>{name}</div>
+//         </a>
+//       </Link>
+//       <div>{`${quantity}`}</div>
+//       <div>{`$${price}`}</div>
+//       <div>{`$${totalPrice(quantity, price)}`}</div>
+//     </div>
+//   );
+// };
 
 const getSumPrice = (products: Product[]) => {
   let sum = 0.0;
@@ -60,22 +59,14 @@ const TotalPrice = () => {
   const totalSum = getSumPrice(products);
 
   return (
-    <div className="flex justify-end font-bold text-lg">
-      <div className="mr-5">Total</div>
-      <div className="mr-60">${totalSum}</div>
-    </div>
-  );
-};
-
-const ColumnHeaders = () => {
-  return (
-    <div className={style.columnHeaders}>
-      <div>Image</div>
-      <div>Name</div>
-      <div>Quantity</div>
-      <div>Price</div>
-      <div>Total</div>
-    </div>
+    // <tr className="">
+    <tr className=" font-bold text-lg">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td className="mr-5">Total</td>
+      <td className="mr-60">${totalSum}</td>
+    </tr>
   );
 };
 
@@ -126,16 +117,60 @@ const CheckoutButton = () => {
   );
 };
 
-const CartWithItems = () => {
+const CartTable = () => {
   const { items } = useCart();
+  return (
+    <table className="divide-y-4 divide-blue-200">
+      <tr className="font-semibold text-base md:text-lg">
+        <td className="pb-2">Image</td>
+        <td className="pb-2">Name</td>
+        <td className="pb-2 pr-2">Quantity</td>
+        <td className="pb-2">Price</td>
+        <td className="pb-2">Total</td>
+      </tr>
+      {items.map(({ image_url, name, price, quantity, _id, status }) => {
+        const href =
+          status === 'secret' ? `/secrets/${_id}` : `/products/${_id}`;
+
+        return (
+          <tr key={_id?.toString()} className="">
+            <td className="">
+              <Link href={href}>
+                <a className="">
+                  <Image
+                    src={image_url}
+                    width={150}
+                    height={200}
+                    alt={name}
+                    // className="h-10"
+                  />
+                </a>
+              </Link>
+            </td>
+            {/* </div> */}
+            <td>
+              <Link href={href}>
+                <a>
+                  <div>{name}</div>
+                </a>
+              </Link>
+            </td>
+            <td>{`${quantity}`}</td>
+            <td className="pr-2">{`$${price}`}</td>
+            <td>{`$${totalPrice(quantity, price)}`}</td>
+          </tr>
+        );
+      })}
+      <TotalPrice />
+    </table>
+  );
+};
+
+const CartWithItems = () => {
   // const testProducts = [testProduct, testProduct, testProduct, testProduct];
   return (
-    <div className="flex flex-col divide-y-2">
-      <ColumnHeaders />
-      {items.map((item, idx) => (
-        <CartItem product={item} key={idx} />
-      ))}
-      <TotalPrice />
+    <div className="flex flex-col">
+      <CartTable />
       <CheckoutButton />
     </div>
   );
